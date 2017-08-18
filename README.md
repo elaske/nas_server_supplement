@@ -19,6 +19,6 @@ On the remote system, the following things need to be installed / enabled for An
 
 ### Install Requirements
 
-`ansible-galaxy install -r requirements.yml`
+`ansible-playbook -k -K install_roles.yml`
 
 ## Getting started

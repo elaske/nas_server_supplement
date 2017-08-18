@@ -1,0 +1,11 @@
+# Get all the dependencies
+- hosts: localhost
+  tasks:
+    - name: Get list of roles to remove
+      local_action: "command awk -F: '$1==\"- name\" {print $2}' {{ requirements_file|default('requirements.yml') }}"
+      register: role_search
+    - name: Remove roles
+      local_action: "command ansible-galaxy remove {{item}}"
+      with_items: "{{ role_search.stdout_lines|list }}"
+    - name: Install roles
+      local_action: "command ansible-galaxy install -r {{ requirements_file|default('requirements.yml') }} --force --ignore-errors"
