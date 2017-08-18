@@ -6,6 +6,11 @@ Specifically, this is destined for a Zotac Zbox MI527 Nano backed by a Synology 
 
 ## Prerequisites
 
+On the remote system, the following things need to be installed / enabled for Ansible to work:
+
+* OpenSSH Server (`openssh-server`)
+* Python 2.x (`python-minimal` will suffice until Ansible catches up)
+
 ### Install Ansible
 
 #### pip
