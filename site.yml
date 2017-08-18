@@ -1,0 +1,14 @@
+---
+- name: Install Docker
+  hosts: all
+  become: true
+  pre_tasks:
+    - name: Install role requirements
+      apt:
+        pkg: "{{ item }}"
+        state: present
+      with_items:
+      - python-pycurl
+
+  roles:
+   - role: angstwad.docker_ubuntu
