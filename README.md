@@ -22,3 +22,25 @@ On the remote system, the following things need to be installed / enabled for An
 `ansible-playbook -k -K install_roles.yml`
 
 ## Getting started
+
+### Group Variables
+
+* `nas_address` - hostname / IP of target NAS NFS mounting system 
+* `plex_claim_code` - claim code to link up with plex.tv
+* `plex_uid` - UID for `plex` user in `config/` directory.
+* `plex_gid` - GID for `plex` user in the `config/` directory.
+
+`plex_uid` and `plex_gid` are used to sync up with a `plex` (or "plex") user
+already on the NFS mount's system.
+
+### Vault
+
+Obviously, you'll have to replace your `vault.yml` with your own secrets. You
+can choose to either create your own `vault.yml` or simply replace the calls
+to `vault_*` variables with the info you want to get things going.
+
+### Running the Playbook
+
+`ansible-playbook -i <YOUR HOST>, -k -K site.yml --ask-vault-pass`
+
+*Note*: remove `--ask-vault-pass` if you are using plaintext secrets.
