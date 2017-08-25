@@ -22,3 +22,20 @@
         - volume1/Movies
         - volume1/StandUp
         - volume1/Formula 1
+        - volume1/Plex
+
+    - name: Add PMS docker.
+      docker_container:
+        name: plex
+        image: plexinc/pms-docker
+        pull: true # Update the docker
+        network_mode: host
+        env:
+          TZ: "{{ ansible_date_time.tz }}"
+          PLEX_CLAIM: "{{ plex_claim_code }}"
+          PLEX_UID: "{{ plex_uid }}"
+          PLEX_GID: "{{ plex_gid }}"
+        volumes:
+          - /mnt/nas/volume1/Plex:/config
+          - /mnt/nas:/data
+          - /tmp/transcode:/transcode
