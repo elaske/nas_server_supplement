@@ -11,7 +11,7 @@
       with_items:
         - nfs-common
 
-    - name: Mount confluence folders
+    - name: Mount Atlassian folders
       mount:
         src: "{{ nas_address }}:/{{ item }}"
         path: "/mnt/nas/{{ item.split('/')[-1] }}"
@@ -19,6 +19,17 @@
         state: mounted
       with_items:
         - volume1/homes/confluence
+        - volume1/homes/jira
+
+    - name: Update Atlassian folder permissions
+      file:
+        path: "/mnt/nas/{{ item }}/application-data"
+        state: directory
+        owner: daemon
+        group: daemon
+      with_items:
+        - confluence
+        - jira
 
     # Container documentation from:
     # https://hub.docker.com/r/atlassian/confluence-server/
@@ -39,3 +50,14 @@
         ports:
           - "8090:8090"
           - "8091:8091"
+
+    - name: Add Jira docker
+      docker_container:
+        name: jira
+        image: cptactionhank/atlassian-jira
+        pull: true
+        network_mode: host
+        volumes:
+          - /mnt/nas/jira/application-data:/var/atlassian/jira
+        ports:
+          - "8080:8080"
