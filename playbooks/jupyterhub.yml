@@ -1,0 +1,28 @@
+---
+- hosts: all
+  become: true
+  tasks:
+    - name: Install required package
+      apt:
+        pkg: "{{ item }}"
+        state: present
+        update-cache: yes
+      become: yes
+      with_items:
+        - nfs-common
+
+    - name: Mount shared folders
+      mount:
+        src: "{{ nas_address }}:/volume1/homes/"
+        path: "/mnt/nas/homes"
+        fstype: nfs
+        state: mounted
+
+    - name: Install JupyterHub docker image
+      docker_container:
+        name: jupyterhub
+        image: jupyterhub/jupyterhub
+        pull: true
+        network_mode: host
+        ports:
+          - "8000:8000"

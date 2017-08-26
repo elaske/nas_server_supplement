@@ -14,3 +14,5 @@
     - role: angstwad.docker_ubuntu
 
 - include: playbooks/plexmediaserver.yml
+
+- include: playbooks/jupyterhub.yml
