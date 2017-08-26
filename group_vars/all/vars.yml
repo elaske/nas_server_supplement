@@ -1,6 +1,6 @@
 ---
 # Location of NAS
 nas_address: "diskstation"
-plex_claim_code: vault_plex_claim_code
+plex_claim_code: "{{ vault_plex_claim_code }}"
 plex_uid: "{{ vault_plex_uid }}"
 plex_gid: "{{ vault_plex_gid }}"

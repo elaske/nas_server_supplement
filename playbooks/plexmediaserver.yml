@@ -24,6 +24,7 @@
         - volume1/Formula 1
         - volume1/Plex
 
+    # Configuration documentation from https://github.com/plexinc/pms-docker
     - name: Add PMS docker.
       docker_container:
         name: plex
@@ -37,5 +38,5 @@
           PLEX_GID: "{{ plex_gid }}"
         volumes:
           - /mnt/nas/volume1/Plex:/config
-          - /mnt/nas:/data
+          - /mnt/nas/volume1:/volume1
           - /tmp/transcode:/transcode
