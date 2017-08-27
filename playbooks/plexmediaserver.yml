@@ -31,6 +31,7 @@
         image: plexinc/pms-docker
         pull: true # Update the docker
         network_mode: host
+        restart_policy: always
         env:
           TZ: "{{ ansible_date_time.tz }}"
           PLEX_CLAIM: "{{ plex_claim_code }}"
