@@ -40,4 +40,8 @@
         volumes:
           - /mnt/nas/volume1/Plex:/config
           - /mnt/nas/volume1:/volume1
-          - /tmp/transcode:/transcode
+          # Use the container's /transcode directory
+        # Use this in the future
+        # See https://github.com/ansible/ansible/pull/25747.
+        # tmpfs:
+        #   - /transcode:rw,exec
