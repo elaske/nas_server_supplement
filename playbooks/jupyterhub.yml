@@ -26,3 +26,6 @@
         network_mode: host
         ports:
           - "8000:8000"
+    # Default = PAMAuthenticator, LocalSpawner
+    # Only seems to work on users within docker
+    # Will not start Jupyter Notebook
